@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>装修设计平台 - 材料商城</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+  <!-- 顶部导航 -->
+  <nav class="bg-white shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex items-center">
+          <i class="fas fa-home text-blue-600 text-2xl mr-2"></i>
+          <span class="text-xl font-semibold">材料商城</span>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="index.html" class="text-gray-700 hover:text-blue-600">首页</a>
+          <a href="design.html" class="text-gray-700 hover:text-blue-600">设计</a>
+          <a href="materials.html" class="text-blue-600">材料</a>
+          <a href="projects.html" class="text-gray-700 hover:text-blue-600">我的项目</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- 材料分类 -->
+    <div class="mb-8">
+      <h2 class="text-xl font-bold mb-4">材料分类</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+        <a href="#" class="bg-white rounded-lg shadow-sm p-4 flex flex-col items-center hover:shadow-md transition">
+          <i class="fas fa-tile text-blue-600 text-2xl mb-2"></i>
+          <span>瓷砖</span>
+        </a>
+        <a href="#" class="bg-white rounded-lg shadow-sm p-4 flex flex-col items-center hover:shadow-md transition">
+          <i class="fas fa-border-style text-blue-600 text-2xl mb-2"></i>
+          <span>地板</span>
+        </a>
+        <!-- 更多分类... -->
+      </div>
+    </div>
+
+    <!-- 品牌筛选 -->
+    <div class="mb-8">
+      <h2 class="text-xl font-bold mb-4">品牌筛选</h2>
+      <div class="flex flex-wrap gap-2">
+        <button class="bg-blue-100 text-blue-600 px-4 py-2 rounded-full text-sm">全部</button>
+        <button class="bg-white border px-4 py-2 rounded-full text-sm hover:bg-gray-100">马可波罗</button>
+        <button class="bg-white border px-4 py-2 rounded-full text-sm hover:bg-gray-100">东鹏</button>
+        <!-- 更多品牌... -->
+      </div>
+    </div>
+
+    <!-- 材料列表 -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500" alt="瓷砖样品" class="w-full h-48 object-cover">
+        <div class="p-4">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="font-medium">马可波罗瓷砖 80×80cm</h3>
+            <span class="bg-blue-100 text-blue-600 px-2 py-1 rounded text-xs">热销</span>
+          </div>
+          <p class="text-gray-500 text-sm mb-3">现代简约风格 耐磨防滑</p>
+          <div class="flex justify-between items-center">
+            <span class="text-red-500 font-bold">¥128/片</span>
+            <button class="bg-blue-600 text-white px-3 py-1 rounded-md text-sm">加入方案</button>
+          </div>
+        </div>
+      </div>
+      <!-- 更多材料... -->
+    </div>
+
+    <!-- 报价生成 -->
+    <div class="mt-10 bg-white rounded-lg shadow-md p-6">
+      <h2 class="text-xl font-bold mb-4">方案报价</h2>
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">材料</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">品牌</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">单价</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">数量</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">小计</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap">瓷砖</td>
+              <td class="px-6 py-4 whitespace-nowrap">马可波罗</td>
+              <td class="px-6 py-4 whitespace-nowrap">¥128</td>
+              <td class="px-6 py-4 whitespace-nowrap">50片</td>
+              <td class="px-6 py-4 whitespace-nowrap">¥6,400</td>
+            </tr>
+            <!-- 更多报价项... -->
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="4" class="px-6 py-4 text-right font-medium">总计</td>
+              <td class="px-6 py-4 font-bold">¥24,800</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <div class="mt-6 flex justify-end">
+        <button class="bg-blue-600 text-white px-6 py-2 rounded-md">申请设计师对接</button>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // 材料选择交互
+    document.querySelectorAll('button:contains("加入方案")').forEach(btn => {
+      btn.addEventListener('click', function() {
+        this.textContent = '已添加';
+        this.classList.remove('bg-blue-600');
+        this.classList.add('bg-green-500');
+      });
+    });
+  </script>
+</body>
+</html>
+  

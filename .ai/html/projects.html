@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>装修设计平台 - 我的项目</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    .progress-bar {
+      height: 8px;
+      border-radius: 4px;
+    }
+    .timeline-item:not(:last-child):after {
+      content: '';
+      position: absolute;
+      left: 19px;
+      top: 28px;
+      height: calc(100% - 28px);
+      width: 2px;
+      background-color: #e5e7eb;
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+  <!-- 顶部导航 -->
+  <nav class="bg-white shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex items-center">
+          <i class="fas fa-home text-blue-600 text-2xl mr-2"></i>
+          <span class="text-xl font-semibold">我的项目</span>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="index.html" class="text-gray-700 hover:text-blue-600">首页</a>
+          <a href="design.html" class="text-gray-700 hover:text-blue-600">设计</a>
+          <a href="materials.html" class="text-gray-700 hover:text-blue-600">材料</a>
+          <a href="projects.html" class="text-blue-600">我的项目</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- 项目概览 -->
+    <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+      <h2 class="text-xl font-bold mb-4">现代简约三居室</h2>
+      <div class="mb-4">
+        <div class="flex justify-between text-sm mb-1">
+          <span>项目进度</span>
+          <span>65%</span>
+        </div>
+        <div class="w-full bg-gray-200 rounded-full progress-bar">
+          <div class="bg-blue-600 progress-bar" style="width: 65%"></div>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="text-center">
+          <div class="text-2xl font-bold text-blue-600">1</div>
+          <div class="text-gray-500 text-sm">设计方案</div>
+        </div>
+        <div class="text-center">
+          <div class="text-2xl font-bold text-blue-600">2</div>
+          <div class="text-gray-500 text-sm">报价确认</div>
+        </div>
+        <div class="text-center">
+          <div class="text-2xl font-bold text-gray-400">3</div>
+          <div class="text-gray-500 text-sm">施工中</div>
+        </div>
+        <div class="text-center">
+          <div class="text-2xl font-bold text-gray-400">4</div>
+          <div class="text-gray-500 text-sm">已完成</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 时间线 -->
+    <div class="bg-white rounded-lg shadow-md p-6">
+      <h2 class="text-xl font-bold mb-4">项目动态</h2>
+      <div class="space-y-6">
+        <div class="timeline-item relative pl-10">
+          <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+            <i class="fas fa-camera text-blue-600"></i>
+          </div>
+          <div class="ml-2">
+            <h3 class="font-medium">工地照片更新</h3>
+            <p class="text-gray-500 text-sm mb-2">2025-08-13 14:30</p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mb-2">
+              <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=500" alt="工地照片" class="rounded-md h-24 object-cover">
+              <!-- 更多照片... -->
+            </div>
+            <p class="text-gray-700">水电改造已完成，正在进行防水工程</p>
+          </div>
+        </div>
+        <!-- 更多时间线项目... -->
+      </div>
+    </div>
+
+    <!-- 设计师沟通 -->
+    <div class="bg-white rounded-lg shadow-md p-6 mt-6">
+      <h2 class="text-xl font-bold mb-4">设计师沟通</h2>
+      <div class="flex items-start space-x-4 mb-6">
+        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="设计师" class="w-12 h-12 rounded-full">
+        <div class="flex-1 bg-gray-100 rounded-lg p-4">
+          <p class="font-medium">李设计师</p>
+          <p class="text-gray-700">您对主卧衣柜的设计有什么特别要求吗？我们可以根据您的需求调整设计方案。</p>
+          <p class="text-gray-500 text-sm mt-2">2025-08-12 10:15</p>
+        </div>
+      </div>
+      <div class="flex">
+        <input type="text" placeholder="输入消息..." class="flex-1 border rounded-l-md px-4 py-2 focus:outline-none">
+        <button class="bg-blue-600 text-white px-4 py-2 rounded-r-md">发送</button>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // 图片点击预览
+    document.querySelectorAll('img').forEach(img => {
+      img.addEventListener('click', () => {
+        alert('放大查看照片');
+      });
+    });
+  </script>
+</body>
+</html>
+  

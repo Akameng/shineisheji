@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>装修设计平台 - 首页</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    .design-card:hover .overlay {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+  <!-- 顶部导航 -->
+  <nav class="bg-white shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex items-center">
+          <i class="fas fa-home text-blue-600 text-2xl mr-2"></i>
+          <span class="text-xl font-semibold">家装设计</span>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="#" class="text-gray-700 hover:text-blue-600">首页</a>
+          <a href="design.html" class="text-gray-700 hover:text-blue-600">设计</a>
+          <a href="materials.html" class="text-gray-700 hover:text-blue-600">材料</a>
+          <a href="projects.html" class="text-gray-700 hover:text-blue-600">我的项目</a>
+          <button class="bg-blue-600 text-white px-4 py-2 rounded-md">登录</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 主内容区 -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- 功能入口 -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+      <a href="design.html" class="bg-white rounded-lg shadow-md p-6 flex flex-col items-center hover:shadow-lg transition">
+        <i class="fas fa-pencil-ruler text-blue-600 text-4xl mb-4"></i>
+        <h3 class="text-lg font-medium">开始设计</h3>
+        <p class="text-gray-500 text-center mt-2">使用酷家乐工具创建您的理想空间</p>
+      </a>
+      <a href="materials.html" class="bg-white rounded-lg shadow-md p-6 flex flex-col items-center hover:shadow-lg transition">
+        <i class="fas fa-boxes text-blue-600 text-4xl mb-4"></i>
+        <h3 class="text-lg font-medium">选择材料</h3>
+        <p class="text-gray-500 text-center mt-2">从知名品牌中选择优质建材</p>
+      </a>
+      <a href="projects.html" class="bg-white rounded-lg shadow-md p-6 flex flex-col items-center hover:shadow-lg transition">
+        <i class="fas fa-tasks text-blue-600 text-4xl mb-4"></i>
+        <h3 class="text-lg font-medium">我的项目</h3>
+        <p class="text-gray-500 text-center mt-2">跟踪设计进度和施工情况</p>
+      </a>
+    </div>
+
+    <!-- 设计案例展示 -->
+    <section class="mb-10">
+      <h2 class="text-2xl font-bold mb-6">精选设计案例</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="design-card relative rounded-lg overflow-hidden shadow-md">
+          <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=500" alt="现代风格客厅" class="w-full h-64 object-cover">
+          <div class="overlay absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 transition">
+            <button class="bg-white text-blue-600 px-4 py-2 rounded-md">查看详情</button>
+          </div>
+          <div class="p-4">
+            <h3 class="font-medium">现代简约客厅</h3>
+            <p class="text-gray-500 text-sm">预算: ¥85,000 - ¥120,000</p>
+          </div>
+        </div>
+        <!-- 更多案例... -->
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // 案例点击交互
+    document.querySelectorAll('.design-card').forEach(card => {
+      card.addEventListener('click', () => {
+        window.location.href = 'design-detail.html';
+      });
+    });
+  </script>
+</body>
+</html>
+  

@@ -1,0 +1,39 @@
+
+  [
+    {
+      "_id": "1",
+      "designer_id": "d001",
+      "designer_name": "设计师A",
+      "project_id": "p001",
+      "project_name": "项目A",
+      "status": "pending",
+      "dispatch_time": 1755074977230,
+      "createdAt": 1755074977230,
+      "updatedAt": 1755074977230
+    },
+    {
+      "_id": "2",
+      "designer_id": "d002",
+      "designer_name": "设计师B",
+      "project_id": "p002",
+      "project_name": "项目B",
+      "status": "accepted",
+      "dispatch_time": 1755074977230,
+      "accept_time": 1755074977230,
+      "createdAt": 1755074977230,
+      "updatedAt": 1755074977230
+    },
+    {
+      "_id": "3",
+      "designer_id": "d003",
+      "designer_name": "设计师C",
+      "project_id": "p003",
+      "project_name": "项目C",
+      "status": "rejected",
+      "dispatch_time": 1755074977230,
+      "reject_time": 1755074977230,
+      "createdAt": 1755074977230,
+      "updatedAt": 1755074977230
+    }
+  ]
+  

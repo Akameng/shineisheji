@@ -1,0 +1,51 @@
+
+  {
+    "name": "designer_dispatch",
+    "title": "设计师派单",
+    "schemas": [
+      {
+        "name": "designer_id",
+        "title": "设计师ID",
+        "type": "String"
+      },
+      {
+        "name": "designer_name",
+        "title": "设计师姓名",
+        "type": "String"
+      },
+      {
+        "name": "project_id",
+        "title": "项目ID",
+        "type": "String"
+      },
+      {
+        "name": "project_name",
+        "title": "项目名称",
+        "type": "String"
+      },
+      {
+        "name": "status",
+        "title": "派单状态",
+        "type": "String"
+      },
+      {
+        "name": "dispatch_time",
+        "title": "派单时间",
+        "type": "DateTime",
+        "format": "timestamp-ms"
+      },
+      {
+        "name": "accept_time",
+        "title": "接受时间",
+        "type": "DateTime",
+        "format": "timestamp-ms"
+      },
+      {
+        "name": "reject_time",
+        "title": "拒绝时间",
+        "type": "DateTime",
+        "format": "timestamp-ms"
+      }
+    ]
+  }
+  

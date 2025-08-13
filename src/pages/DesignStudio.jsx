@@ -15,65 +15,62 @@ export default function DesignStudio(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [designerLoaded, setDesignerLoaded] = useState(false);
   useEffect(() => {
-    const loadKujialeSDK = () => {
-      if (window.KLDesigner) {
-        initializeDesigner();
-        return;
-      }
-      const script = document.createElement('script');
-      script.src = 'https://sdk.kujiale.com/designer/v1/kldesigner.js';
-      script.async = true;
-      script.onload = () => {
-        if (window.KLDesigner) {
-          initializeDesigner();
-        } else {
-          handleLoadError();
-        }
-      };
-      script.onerror = handleLoadError;
-      document.body.appendChild(script);
-      return () => {
-        document.body.removeChild(script);
-      };
-    };
-    const initializeDesigner = () => {
+    const initKujialeDesigner = () => {
       try {
+        if (!window.KLDesigner) {
+          throw new Error('酷家乐SDK未加载');
+        }
         window.KLDesigner.init({
           container: document.getElementById('kujiale-container'),
-          // 替换为您的实际API配置
           appKey: 'YOUR_APP_KEY',
+          // 替换为实际appKey
           onReady: () => {
             setDesignerLoaded(true);
             setIsLoading(false);
+            toast({
+              title: '设计工具已加载',
+              description: '可以开始设计了'
+            });
           },
           onError: error => {
-            console.error('酷家乐设计工具初始化失败:', error);
-            handleLoadError();
+            console.error('酷家乐初始化错误:', error);
+            setIsLoading(false);
+            toast({
+              title: '加载失败',
+              description: error.message || '设计工具加载失败',
+              variant: 'destructive'
+            });
           }
         });
       } catch (error) {
-        handleLoadError();
+        console.error('初始化异常:', error);
+        setIsLoading(false);
+        toast({
+          title: '初始化失败',
+          description: error.message || '设计工具初始化异常',
+          variant: 'destructive'
+        });
       }
     };
-    const handleLoadError = () => {
-      setIsLoading(false);
-      toast({
-        title: '加载失败',
-        description: '无法加载酷家乐设计工具，请稍后重试',
-        variant: 'destructive'
-      });
+    const loadScript = () => {
+      const script = document.createElement('script');
+      script.src = 'https://sdk.kujiale.com/designer/v1/kldesigner.js';
+      script.async = true;
+      script.onload = initKujialeDesigner;
+      script.onerror = () => {
+        setIsLoading(false);
+        toast({
+          title: 'SDK加载失败',
+          description: '无法加载酷家乐SDK',
+          variant: 'destructive'
+        });
+      };
+      document.body.appendChild(script);
+      return () => document.body.removeChild(script);
     };
-    loadKujialeSDK();
+    loadScript();
   }, [toast]);
   const handleSaveDesign = async () => {
-    if (!designerLoaded) {
-      toast({
-        title: '操作失败',
-        description: '设计工具未加载完成',
-        variant: 'destructive'
-      });
-      return;
-    }
     try {
       const designData = window.KLDesigner.getCurrentDesign();
       await $w.cloud.callDataSource({
@@ -89,7 +86,7 @@ export default function DesignStudio(props) {
       });
       toast({
         title: '保存成功',
-        description: '设计已保存'
+        description: '设计已保存到云端'
       });
     } catch (error) {
       console.error('保存失败:', error);

@@ -15,18 +15,15 @@ export default function DesignStudio(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [designerLoaded, setDesignerLoaded] = useState(false);
   useEffect(() => {
-    const initKujialeDesigner = async () => {
+    const loadOpenSourceDesigner = async () => {
       try {
-        // 动态加载酷家乐SDK
-        if (!window.KLDesigner) {
-          await loadScript('https://sdk.kujiale.com/designer/v1/kldesigner.js');
-        }
+        // 加载开源设计工具库
+        await loadScript('https://cdn.jsdelivr.net/npm/opensource-designer@1.0.0/dist/designer.min.js');
 
         // 初始化设计工具
-        window.KLDesigner.init({
-          container: document.getElementById('kujiale-container'),
-          appKey: 'YOUR_APP_KEY',
-          // 替换为实际appKey
+        window.OpenSourceDesigner.init({
+          container: document.getElementById('designer-container'),
+          theme: 'light',
           onReady: () => {
             setDesignerLoaded(true);
             setIsLoading(false);
@@ -58,17 +55,17 @@ export default function DesignStudio(props) {
         document.body.appendChild(script);
       });
     };
-    initKujialeDesigner();
+    loadOpenSourceDesigner();
     return () => {
       // 清理工作
-      if (window.KLDesigner && window.KLDesigner.destroy) {
-        window.KLDesigner.destroy();
+      if (window.OpenSourceDesigner && window.OpenSourceDesigner.destroy) {
+        window.OpenSourceDesigner.destroy();
       }
     };
   }, [toast]);
   const handleSaveDesign = async () => {
     try {
-      const designData = window.KLDesigner.getCurrentDesign();
+      const designData = window.OpenSourceDesigner.getCurrentDesign();
       await $w.cloud.callDataSource({
         dataSourceName: 'designer_dispatch',
         methodName: 'wedaCreateV2',
@@ -102,7 +99,7 @@ export default function DesignStudio(props) {
             {isLoading ? <div className="flex justify-center items-center h-96">
                 <p>正在加载设计工具...</p>
               </div> : <>
-                <div id="kujiale-container" className="h-96 border rounded-lg mb-4 bg-gray-100">
+                <div id="designer-container" className="h-96 border rounded-lg mb-4 bg-gray-100">
                   {!designerLoaded && <div className="flex justify-center items-center h-full">
                       <p>设计工具加载失败</p>
                     </div>}

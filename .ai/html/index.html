@@ -4,221 +4,80 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>家装灵感 - 首页</title>
+  <title>装修设计平台 - 首页</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    .case-card:hover .case-overlay {
+    .design-card:hover .overlay {
       opacity: 1;
-    }
-    .case-overlay {
-      transition: opacity 0.3s ease;
     }
   </style>
 </head>
 <body class="bg-gray-50">
   <!-- 顶部导航 -->
-  <header class="bg-white shadow-sm sticky top-0 z-10">
-    <div class="container mx-auto px-4 py-3 flex items-center justify-between">
-      <div class="flex items-center space-x-2">
-        <i class="fas fa-home text-blue-500 text-xl"></i>
-        <h1 class="text-xl font-bold text-gray-800">家装灵感</h1>
-      </div>
-      <div class="flex items-center space-x-4">
-        <button class="text-gray-600 hover:text-blue-500">
-          <i class="fas fa-search text-lg"></i>
-        </button>
-        <button class="text-gray-600 hover:text-blue-500">
-          <i class="fas fa-user-circle text-lg"></i>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <!-- 搜索栏 -->
-  <div class="bg-white py-4 px-4 shadow-sm">
-    <div class="container mx-auto">
-      <div class="relative">
-        <input type="text" placeholder="搜索家装风格、设计师..." 
-          class="w-full py-2 px-4 pl-10 rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-        <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
-      </div>
-    </div>
-  </div>
-
-  <!-- 分类导航 -->
-  <div class="bg-white py-3 overflow-x-auto">
-    <div class="container mx-auto px-4">
-      <div class="flex space-x-6">
-        <button class="flex flex-col items-center px-2">
-          <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mb-1">
-            <i class="fas fa-couch text-blue-500 text-xl"></i>
-          </div>
-          <span class="text-xs text-gray-700">客厅</span>
-        </button>
-        <button class="flex flex-col items-center px-2">
-          <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mb-1">
-            <i class="fas fa-utensils text-green-500 text-xl"></i>
-          </div>
-          <span class="text-xs text-gray-700">餐厅</span>
-        </button>
-        <button class="flex flex-col items-center px-2">
-          <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center mb-1">
-            <i class="fas fa-bed text-purple-500 text-xl"></i>
-          </div>
-          <span class="text-xs text-gray-700">卧室</span>
-        </button>
-        <button class="flex flex-col items-center px-2">
-          <div class="w-12 h-12 rounded-full bg-yellow-100 flex items-center justify-center mb-1">
-            <i class="fas fa-bath text-yellow-500 text-xl"></i>
-          </div>
-          <span class="text-xs text-gray-700">浴室</span>
-        </button>
-        <button class="flex flex-col items-center px-2">
-          <div class="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center mb-1">
-            <i class="fas fa-home text-red-500 text-xl"></i>
-          </div>
-          <span class="text-xs text-gray-700">全屋</span>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- 精选案例 -->
-  <div class="container mx-auto px-4 py-6">
-    <div class="flex items-center justify-between mb-4">
-      <h2 class="text-lg font-bold text-gray-800">精选家装案例</h2>
-      <a href="#" class="text-sm text-blue-500">查看全部 <i class="fas fa-chevron-right"></i></a>
-    </div>
-    
-    <div class="grid grid-cols-2 gap-4">
-      <!-- 案例1 -->
-      <div class="relative rounded-xl overflow-hidden shadow-md case-card">
-        <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=500" 
-             alt="现代简约客厅" class="w-full h-48 object-cover">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent case-overlay opacity-0 flex items-end p-4">
-          <div>
-            <h3 class="text-white font-medium">现代简约客厅</h3>
-            <p class="text-white text-xs">120㎡ · 设计师: 李想</p>
-          </div>
+  <nav class="bg-white shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex items-center">
+          <i class="fas fa-home text-blue-600 text-2xl mr-2"></i>
+          <span class="text-xl font-semibold">家装设计</span>
         </div>
-      </div>
-      
-      <!-- 案例2 -->
-      <div class="relative rounded-xl overflow-hidden shadow-md case-card">
-        <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200?w=500" 
-             alt="北欧风格卧室" class="w-full h-48 object-cover">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent case-overlay opacity-0 flex items-end p-4">
-          <div>
-            <h3 class="text-white font-medium">北欧风格卧室</h3>
-            <p class="text-white text-xs">90㎡ · 设计师: 王雪</p>
-          </div>
+        <div class="flex items-center space-x-4">
+          <a href="#" class="text-gray-700 hover:text-blue-600">首页</a>
+          <a href="design.html" class="text-gray-700 hover:text-blue-600">设计</a>
+          <a href="materials.html" class="text-gray-700 hover:text-blue-600">材料</a>
+          <a href="projects.html" class="text-gray-700 hover:text-blue-600">我的项目</a>
+          <button class="bg-blue-600 text-white px-4 py-2 rounded-md">登录</button>
         </div>
-      </div>
-      
-      <!-- 案例3 -->
-      <div class="relative rounded-xl overflow-hidden shadow-md case-card">
-        <img src="https://images.unsplash.com/photo-1600121848594-d8644e57abab?w=500" 
-             alt="工业风餐厅" class="w-full h-48 object-cover">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent case-overlay opacity-0 flex items-end p-4">
-          <div>
-            <h3 class="text-white font-medium">工业风餐厅</h3>
-            <p class="text-white text-xs">150㎡ · 设计师: 张明</p>
-          </div>
-        </div>
-      </div>
-      
-      <!-- 案例4 -->
-      <div class="relative rounded-xl overflow-hidden shadow-md case-card">
-        <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=500" 
-             alt="日式禅意浴室" class="w-full h-48 object-cover">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent case-overlay opacity-0 flex items-end p-4">
-          <div>
-            <h3 class="text-white font-medium">日式禅意浴室</h3>
-            <p class="text-white text-xs">80㎡ · 设计师: 林静</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 推荐设计师 -->
-  <div class="container mx-auto px-4 py-6">
-    <div class="flex items-center justify-between mb-4">
-      <h2 class="text-lg font-bold text-gray-800">推荐设计师</h2>
-      <a href="#" class="text-sm text-blue-500">查看全部 <i class="fas fa-chevron-right"></i></a>
-    </div>
-    
-    <div class="flex space-x-4 overflow-x-auto pb-2">
-      <div class="flex-shrink-0">
-        <div class="w-24 h-24 rounded-full overflow-hidden border-2 border-blue-500">
-          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500" 
-               alt="设计师李想" class="w-full h-full object-cover">
-        </div>
-        <p class="text-center text-xs mt-1 font-medium">李想</p>
-      </div>
-      <div class="flex-shrink-0">
-        <div class="w-24 h-24 rounded-full overflow-hidden border-2 border-purple-500">
-          <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=500" 
-               alt="设计师王雪" class="w-full h-full object-cover">
-        </div>
-        <p class="text-center text-xs mt-1 font-medium">王雪</p>
-      </div>
-      <div class="flex-shrink-0">
-        <div class="w-24 h-24 rounded-full overflow-hidden border-2 border-green-500">
-          <img src="https://images.unsplash.com/photo-1560253023-3ec5d502959f?w=500" 
-               alt="设计师张明" class="w-full h-full object-cover">
-        </div>
-        <p class="text-center text-xs mt-1 font-medium">张明</p>
-      </div>
-      <div class="flex-shrink-0">
-        <div class="w-24 h-24 rounded-full overflow-hidden border-2 border-yellow-500">
-          <img src="https://images.unsplash.com/photo-1573497019705-4a36b64d0f48?w=500" 
-               alt="设计师林静" class="w-full h-full object-cover">
-        </div>
-        <p class="text-center text-xs mt-1 font-medium">林静</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- 底部导航 -->
-  <nav class="bg-white fixed bottom-0 w-full border-t border-gray-200">
-    <div class="container mx-auto px-4">
-      <div class="flex justify-around">
-        <a href="#" class="py-3 px-4 text-blue-500 flex flex-col items-center">
-          <i class="fas fa-home text-lg"></i>
-          <span class="text-xs mt-1">首页</span>
-        </a>
-        <a href="#" class="py-3 px-4 text-gray-500 flex flex-col items-center">
-          <i class="fas fa-compass text-lg"></i>
-          <span class="text-xs mt-1">发现</span>
-        </a>
-        <a href="#" class="py-3 px-4 text-gray-500 flex flex-col items-center">
-          <i class="fas fa-heart text-lg"></i>
-          <span class="text-xs mt-1">收藏</span>
-        </a>
-        <a href="#" class="py-3 px-4 text-gray-500 flex flex-col items-center">
-          <i class="fas fa-user text-lg"></i>
-          <span class="text-xs mt-1">我的</span>
-        </a>
       </div>
     </div>
   </nav>
 
-  <script>
-    // 案例卡片点击事件
-    document.querySelectorAll('.case-card').forEach(card => {
-      card.addEventListener('click', function() {
-        // 这里可以添加跳转到案例详情页的逻辑
-        console.log('点击了案例卡片:', this.querySelector('h3').textContent);
-      });
-    });
+  <!-- 主内容区 -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- 功能入口 -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+      <a href="design.html" class="bg-white rounded-lg shadow-md p-6 flex flex-col items-center hover:shadow-lg transition">
+        <i class="fas fa-pencil-ruler text-blue-600 text-4xl mb-4"></i>
+        <h3 class="text-lg font-medium">开始设计</h3>
+        <p class="text-gray-500 text-center mt-2">使用酷家乐工具创建您的理想空间</p>
+      </a>
+      <a href="materials.html" class="bg-white rounded-lg shadow-md p-6 flex flex-col items-center hover:shadow-lg transition">
+        <i class="fas fa-boxes text-blue-600 text-4xl mb-4"></i>
+        <h3 class="text-lg font-medium">选择材料</h3>
+        <p class="text-gray-500 text-center mt-2">从知名品牌中选择优质建材</p>
+      </a>
+      <a href="projects.html" class="bg-white rounded-lg shadow-md p-6 flex flex-col items-center hover:shadow-lg transition">
+        <i class="fas fa-tasks text-blue-600 text-4xl mb-4"></i>
+        <h3 class="text-lg font-medium">我的项目</h3>
+        <p class="text-gray-500 text-center mt-2">跟踪设计进度和施工情况</p>
+      </a>
+    </div>
 
-    // 设计师点击事件
-    document.querySelectorAll('.flex-shrink-0').forEach(designer => {
-      designer.addEventListener('click', function() {
-        // 这里可以添加跳转到设计师详情页的逻辑
-        console.log('点击了设计师:', this.querySelector('p').textContent);
+    <!-- 设计案例展示 -->
+    <section class="mb-10">
+      <h2 class="text-2xl font-bold mb-6">精选设计案例</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="design-card relative rounded-lg overflow-hidden shadow-md">
+          <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=500" alt="现代风格客厅" class="w-full h-64 object-cover">
+          <div class="overlay absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 transition">
+            <button class="bg-white text-blue-600 px-4 py-2 rounded-md">查看详情</button>
+          </div>
+          <div class="p-4">
+            <h3 class="font-medium">现代简约客厅</h3>
+            <p class="text-gray-500 text-sm">预算: ¥85,000 - ¥120,000</p>
+          </div>
+        </div>
+        <!-- 更多案例... -->
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // 案例点击交互
+    document.querySelectorAll('.design-card').forEach(card => {
+      card.addEventListener('click', () => {
+        window.location.href = 'design-detail.html';
       });
     });
   </script>

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 // @ts-ignore;
 import { Button, Card, CardHeader, CardTitle, CardContent, useToast } from '@/components/ui';
 
+// @ts-ignore;
 import { Navbar } from '@/components/Navbar';
 export default function DesignStudio(props) {
   const {
@@ -14,57 +15,76 @@ export default function DesignStudio(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [designerLoaded, setDesignerLoaded] = useState(false);
   useEffect(() => {
-    const loadHomeDesigner = async () => {
+    let script;
+    const loadKujialeSDK = () => {
+      if (window.KLDesigner) {
+        initializeDesigner();
+        return;
+      }
+      script = document.createElement('script');
+      script.src = 'https://sdk.kujiale.com/designer/v1/kldesigner.js';
+      script.async = true;
+      script.onload = () => {
+        if (window.KLDesigner) {
+          initializeDesigner();
+        } else {
+          handleLoadError('SDK加载失败，但未定义KLDesigner对象');
+        }
+      };
+      script.onerror = () => handleLoadError('无法加载酷家乐SDK脚本');
+      document.body.appendChild(script);
+    };
+    const initializeDesigner = () => {
       try {
-        // 加载家装设计专用库
-        const {
-          default: HomeDesigner
-        } = await import('home-designer');
-
-        // 初始化家装设计工具
-        const designer = new HomeDesigner({
-          container: document.getElementById('designer-container'),
-          mode: '2d',
-          tools: ['wall', 'door', 'window', 'furniture'],
-          materials: ['wood', 'tile', 'paint'],
+        window.KLDesigner.init({
+          container: document.getElementById('kujiale-container'),
+          appKey: 'YOUR_APP_KEY',
+          // 替换为实际appKey
           onReady: () => {
             setDesignerLoaded(true);
             setIsLoading(false);
             toast({
-              title: '家装设计工具已加载',
-              description: '可以开始设计您的家了'
+              title: '设计工具已加载',
+              description: '可以开始设计了'
             });
           },
           onError: error => {
-            throw new Error(`家装设计工具初始化失败: ${error.message}`);
+            handleLoadError(`设计工具初始化失败: ${error.message || '未知错误'}`);
           }
         });
-
-        // 预加载家装素材
-        designer.loadMaterials([{
-          type: 'floor',
-          name: '木地板'
-        }, {
-          type: 'wall',
-          name: '瓷砖'
-        }, {
-          type: 'furniture',
-          name: '沙发'
-        }]);
       } catch (error) {
-        setIsLoading(false);
-        toast({
-          title: '加载失败',
-          description: error.message,
-          variant: 'destructive'
-        });
+        handleLoadError(`初始化异常: ${error.message || '未知错误'}`);
       }
     };
-    loadHomeDesigner();
+    const handleLoadError = message => {
+      setIsLoading(false);
+      toast({
+        title: '加载失败',
+        description: message,
+        variant: 'destructive'
+      });
+      if (script) {
+        document.body.removeChild(script);
+      }
+    };
+    loadKujialeSDK();
+    return () => {
+      if (script) {
+        document.body.removeChild(script);
+      }
+    };
   }, [toast]);
   const handleSaveDesign = async () => {
+    if (!designerLoaded) {
+      toast({
+        title: '操作失败',
+        description: '设计工具未加载完成',
+        variant: 'destructive'
+      });
+      return;
+    }
     try {
-      const designData = window.HomeDesigner.exportDesign();
+      const designData = window.KLDesigner.getCurrentDesign();
       await $w.cloud.callDataSource({
         dataSourceName: 'designer_dispatch',
         methodName: 'wedaCreateV2',
@@ -72,19 +92,19 @@ export default function DesignStudio(props) {
           data: {
             designData: JSON.stringify(designData),
             status: 'draft',
-            createdAt: new Date().toISOString(),
-            designType: 'home' // 标明是家装设计
+            createdAt: new Date().toISOString()
           }
         }
       });
       toast({
         title: '保存成功',
-        description: '您的家装设计已保存'
+        description: '设计已保存到云端'
       });
     } catch (error) {
+      console.error('保存失败:', error);
       toast({
         title: '保存失败',
-        description: error.message,
+        description: error.message || '保存设计时出错',
         variant: 'destructive'
       });
     }
@@ -93,19 +113,19 @@ export default function DesignStudio(props) {
       <div className="p-4">
         <Card>
           <CardHeader>
-            <CardTitle>家装设计工作室</CardTitle>
+            <CardTitle>设计工作室</CardTitle>
           </CardHeader>
           <CardContent>
             {isLoading ? <div className="flex justify-center items-center h-96">
-                <p>正在加载家装设计工具...</p>
+                <p>正在加载设计工具...</p>
               </div> : <>
-                <div id="designer-container" className="h-96 border rounded-lg mb-4 bg-gray-100">
+                <div id="kujiale-container" className="h-96 border rounded-lg mb-4 bg-gray-100">
                   {!designerLoaded && <div className="flex justify-center items-center h-full">
-                      <p>家装设计工具加载失败</p>
+                      <p>设计工具加载失败</p>
                     </div>}
                 </div>
-                <Button onClick={handleSaveDesign} className="w-full bg-primary hover:bg-primary-dark" disabled={!designerLoaded}>
-                  保存家装设计
+                <Button onClick={handleSaveDesign} className="w-full" disabled={!designerLoaded}>
+                  保存设计
                 </Button>
               </>}
           </CardContent>

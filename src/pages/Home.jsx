@@ -10,10 +10,10 @@ export default function Home(props) {
   } = props;
   return <div className="pb-16">
       <div className="p-4">
-        <h1 className="text-2xl font-bold mb-4">欢迎使用设计工作室</h1>
+        <h1 className="text-2xl font-bold mb-4">欢迎使用家装设计平台</h1>
         <Button onClick={() => $w.utils.navigateTo({
         pageId: 'design'
-      })} className="w-full">
+      })} className="w-full bg-primary hover:bg-primary-dark">
           开始设计
         </Button>
       </div>

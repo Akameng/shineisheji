@@ -12,7 +12,7 @@ export default function App(props) {
 
   // 使用系统内置路由功能
   const renderPage = () => {
-    const pageId = $w.page.dataset.params?.pageId || 'home';
+    const pageId = $w?.page?.dataset?.params?.pageId || 'home';
     switch (pageId) {
       case 'home':
         return <Home $w={$w} />;

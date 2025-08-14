@@ -1,7 +1,7 @@
 // @ts-ignore;
 import React from 'react';
 // @ts-ignore;
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui';
+import { Button } from '@/components/ui';
 
 import { Navbar } from '@/components/Navbar';
 export default function Home(props) {
@@ -10,14 +10,12 @@ export default function Home(props) {
   } = props;
   return <div className="pb-16">
       <div className="p-4">
-        <Card>
-          <CardHeader>
-            <CardTitle>欢迎使用装修设计平台</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p>开始您的装修设计之旅</p>
-          </CardContent>
-        </Card>
+        <h1 className="text-2xl font-bold mb-4">欢迎使用设计工作室</h1>
+        <Button onClick={() => $w.utils.navigateTo({
+        pageId: 'design'
+      })} className="w-full">
+          开始设计
+        </Button>
       </div>
       <Navbar $w={$w} />
     </div>;

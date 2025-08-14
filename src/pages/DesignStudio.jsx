@@ -15,11 +15,27 @@ export default function DesignStudio(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [designerLoaded, setDesignerLoaded] = useState(false);
   useEffect(() => {
-    const initKujialeDesigner = () => {
-      try {
-        if (!window.KLDesigner) {
-          throw new Error('酷家乐SDK未加载');
+    let script;
+    const loadKujialeSDK = () => {
+      if (window.KLDesigner) {
+        initializeDesigner();
+        return;
+      }
+      script = document.createElement('script');
+      script.src = 'https://sdk.kujiale.com/designer/v1/kldesigner.js';
+      script.async = true;
+      script.onload = () => {
+        if (window.KLDesigner) {
+          initializeDesigner();
+        } else {
+          handleLoadError('SDK加载失败，但未定义KLDesigner对象');
         }
+      };
+      script.onerror = () => handleLoadError('无法加载酷家乐SDK脚本');
+      document.body.appendChild(script);
+    };
+    const initializeDesigner = () => {
+      try {
         window.KLDesigner.init({
           container: document.getElementById('kujiale-container'),
           appKey: 'YOUR_APP_KEY',
@@ -33,44 +49,40 @@ export default function DesignStudio(props) {
             });
           },
           onError: error => {
-            console.error('酷家乐初始化错误:', error);
-            setIsLoading(false);
-            toast({
-              title: '加载失败',
-              description: error.message || '设计工具加载失败',
-              variant: 'destructive'
-            });
+            handleLoadError(`设计工具初始化失败: ${error.message || '未知错误'}`);
           }
         });
       } catch (error) {
-        console.error('初始化异常:', error);
-        setIsLoading(false);
-        toast({
-          title: '初始化失败',
-          description: error.message || '设计工具初始化异常',
-          variant: 'destructive'
-        });
+        handleLoadError(`初始化异常: ${error.message || '未知错误'}`);
       }
     };
-    const loadScript = () => {
-      const script = document.createElement('script');
-      script.src = 'https://sdk.kujiale.com/designer/v1/kldesigner.js';
-      script.async = true;
-      script.onload = initKujialeDesigner;
-      script.onerror = () => {
-        setIsLoading(false);
-        toast({
-          title: 'SDK加载失败',
-          description: '无法加载酷家乐SDK',
-          variant: 'destructive'
-        });
-      };
-      document.body.appendChild(script);
-      return () => document.body.removeChild(script);
+    const handleLoadError = message => {
+      setIsLoading(false);
+      toast({
+        title: '加载失败',
+        description: message,
+        variant: 'destructive'
+      });
+      if (script) {
+        document.body.removeChild(script);
+      }
     };
-    loadScript();
+    loadKujialeSDK();
+    return () => {
+      if (script) {
+        document.body.removeChild(script);
+      }
+    };
   }, [toast]);
   const handleSaveDesign = async () => {
+    if (!designerLoaded) {
+      toast({
+        title: '操作失败',
+        description: '设计工具未加载完成',
+        variant: 'destructive'
+      });
+      return;
+    }
     try {
       const designData = window.KLDesigner.getCurrentDesign();
       await $w.cloud.callDataSource({

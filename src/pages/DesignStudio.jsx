@@ -26,9 +26,7 @@ export default function DesignStudio(props) {
         const instance = new OpenDesigner({
           container: document.getElementById('designer-container'),
           mode: '2d',
-          // 2D设计模式
           tools: ['select', 'rectangle', 'circle', 'text'],
-          // 基本工具
           onReady: () => {
             setDesignerLoaded(true);
             setIsLoading(false);
@@ -53,7 +51,6 @@ export default function DesignStudio(props) {
     };
     loadDesigner();
     return () => {
-      // 清理工作
       if (designerInstance && designerInstance.destroy) {
         designerInstance.destroy();
       }

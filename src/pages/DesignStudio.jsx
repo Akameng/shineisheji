@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 // @ts-ignore;
 import { Button, Card, CardHeader, CardTitle, CardContent, useToast } from '@/components/ui';
 
-// @ts-ignore;
 import { Navbar } from '@/components/Navbar';
 export default function DesignStudio(props) {
   const {
@@ -14,19 +13,26 @@ export default function DesignStudio(props) {
   } = useToast();
   const [isLoading, setIsLoading] = useState(true);
   const [designerLoaded, setDesignerLoaded] = useState(false);
+  const [designerInstance, setDesignerInstance] = useState(null);
   useEffect(() => {
-    const loadOpenSourceDesigner = async () => {
+    const loadDesigner = async () => {
       try {
         // 加载开源设计工具库
-        await loadScript('https://cdn.jsdelivr.net/npm/opensource-designer@1.0.0/dist/designer.min.js');
+        const {
+          default: OpenDesigner
+        } = await import('open-designer');
 
         // 初始化设计工具
-        window.OpenSourceDesigner.init({
+        const instance = new OpenDesigner({
           container: document.getElementById('designer-container'),
-          theme: 'light',
+          mode: '2d',
+          // 2D设计模式
+          tools: ['select', 'rectangle', 'circle', 'text'],
+          // 基本工具
           onReady: () => {
             setDesignerLoaded(true);
             setIsLoading(false);
+            setDesignerInstance(instance);
             toast({
               title: '设计工具已加载',
               description: '可以开始设计了'
@@ -40,32 +46,23 @@ export default function DesignStudio(props) {
         setIsLoading(false);
         toast({
           title: '加载失败',
-          description: error.message,
+          description: error.message || '无法加载设计工具',
           variant: 'destructive'
         });
       }
     };
-    const loadScript = src => {
-      return new Promise((resolve, reject) => {
-        const script = document.createElement('script');
-        script.src = src;
-        script.async = true;
-        script.onload = resolve;
-        script.onerror = () => reject(new Error(`无法加载脚本: ${src}`));
-        document.body.appendChild(script);
-      });
-    };
-    loadOpenSourceDesigner();
+    loadDesigner();
     return () => {
       // 清理工作
-      if (window.OpenSourceDesigner && window.OpenSourceDesigner.destroy) {
-        window.OpenSourceDesigner.destroy();
+      if (designerInstance && designerInstance.destroy) {
+        designerInstance.destroy();
       }
     };
   }, [toast]);
   const handleSaveDesign = async () => {
+    if (!designerInstance) return;
     try {
-      const designData = window.OpenSourceDesigner.getCurrentDesign();
+      const designData = designerInstance.export();
       await $w.cloud.callDataSource({
         dataSourceName: 'designer_dispatch',
         methodName: 'wedaCreateV2',
